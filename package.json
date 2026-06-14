@@ -2,12 +2,15 @@
   "name": "carjim-labs",
   "version": "1.0.0",
   "type": "commonjs",
-  "description": "Repositório dedicado ao nosso projeto de start-up, para analise de imagens para laboratórios.",
+  "description": "Repositório dedicado ao nosso projeto de start-up, para analise de imagens de exames de sangue para laboratórios.",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
   },
   "repository": {
     "type": "git",
@@ -23,11 +26,14 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",
-    "tsx": "^4.22.3",
-    "typescript": "^6.0.3"
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.22.4",
+    "typescript": "5.8"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "drizzle-orm": "^0.45.2",
+    "express": "^5.2.1",
+    "postgres": "^3.4.9"
   }
 }

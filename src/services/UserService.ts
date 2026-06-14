@@ -1,5 +1,5 @@
-import { CreateUserDTO } from "../dtos/CreateUserDTO";
-import { User } from "../interfaces/User";
+import { CreateUserDTO } from "../dtos/createUserDTO";
+import { User } from "../interfaces/user";
 
 export class UserService {
     private users: User[] = [];
