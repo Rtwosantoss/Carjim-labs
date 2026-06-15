@@ -1,21 +1,18 @@
-import { CreateUserDTO } from "../dtos/createUserDTO";
-import { User } from "../interfaces/user";
+import { CreateUserDTO } from "../dtos/CreateUserDTO";
+import { UserRepository } from "../repositories/UserRepository";
+
+const userRepository = new UserRepository();
 
 export class UserService {
-    private users: User[] = [];
+  async findAll() {
+    return await userRepository.findAll();
+  }
 
-    async findAll(): Promise<User[]> {
-        return this.users;
-    }
-
-    async create(data: CreateUserDTO): Promise<User> {
-        const user: User = {
-            id: Math.floor(Math.random() * 1000),
-            name: data.name,
-            email: data.email,
-        };
-
-        this.users.push(user);
-        return user;
-    }
+  async create(data: CreateUserDTO) {
+    return await userRepository.create({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
+  }
 }
