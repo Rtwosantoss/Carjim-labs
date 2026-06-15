@@ -33,6 +33,13 @@
           <a href="#funcionalidades">Funcionalidades</a>
           <a href="#como-funciona">Como Funciona</a>
         </nav>
+
+        <div class="justify-self-end">
+          <RouterLink to="/login"
+            class="px-5 py-2 rounded-lg bg-[#24b6a1] text-white text-sm font-semibold hover:bg-[#1fa090] transition">
+            Entrar
+          </RouterLink>
+        </div>
       </div>
 
     </header>
@@ -146,6 +153,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router'
 import FuncionalidadeCard from '../components/FuncionalidadeCard.vue'
 import EtapaCard from '../components/EtapaCard.vue'
 </script>

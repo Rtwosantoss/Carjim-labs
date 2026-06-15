@@ -5,15 +5,15 @@ import RegisterView from '../views/RegisterView.vue'
 import HomeView from '../views/HomeView.vue'
 
 const routes = [
+
     {
         path: '/',
-        name: 'login',
-        component: LoginView,
-    },
-    {
-        path: '/home',
         name: 'home',
         component: HomeView,
+    }, {
+        path: '/login',
+        name: 'login',
+        component: LoginView,
     },
     {
         path: '/register',
