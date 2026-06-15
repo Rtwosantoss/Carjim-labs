@@ -6,7 +6,7 @@ const router = Router();
 const userService = new UserService();   
 const userController = new UserController(userService); 
 
-router.get("/users", userController.findAll);
-router.post("/users", userController.create);
+router.get("/", userController.findAll);
+router.post("/", userController.create);
 
 export default router;
