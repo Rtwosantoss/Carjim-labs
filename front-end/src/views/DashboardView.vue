@@ -25,7 +25,7 @@
       <div class="bg-white rounded-xl border border-slate-200 p-6">
         <h2 class="text-lg font-semibold text-slate-900">Ações Rápidas</h2>
         <p class="text-sm text-slate-500 mt-1 mb-4">Acesse as principais funcionalidades do sistema</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <RouterLink v-for="action in quickActions" :key="action.to" :to="action.to"
             class="flex flex-col items-center gap-2 py-6 rounded-xl border border-slate-200 hover:border-[#24b6a1] hover:bg-[#24b6a1]/5 transition-all text-[#24b6a1]">
             <span v-html="action.icon" />
@@ -119,7 +119,6 @@ const stats = [
 
 const quickActions = [
   { label: 'Enviar Exame',       to: '/dashboard/enviar-exame', icon: svg('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/>') },
-  { label: 'Cadastrar Paciente', to: '/dashboard/pacientes',    icon: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>') },
   { label: 'Cadastrar Biomédico',to: '/dashboard/biomedicos',   icon: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>') },
   { label: 'Ver Laudos',         to: '/dashboard/laudos',       icon: svg('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>') },
 ]
