@@ -27,16 +27,9 @@
 
       <!-- Table Card -->
       <div class="bg-white rounded-xl border border-slate-200">
-        <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h2 class="text-lg font-semibold text-slate-900">Lista de Pacientes</h2>
-            <p class="text-sm text-slate-500">Cadastre pacientes para vincular aos exames e laudos</p>
-          </div>
-          <button @click="showModal = true"
-            class="flex items-center gap-2 bg-[#24b6a1] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#1fa090] transition">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
-            Cadastrar Paciente
-          </button>
+        <div class="p-6 border-b border-slate-200">
+          <h2 class="text-lg font-semibold text-slate-900">Lista de Pacientes</h2>
+          <p class="text-sm text-slate-500">Visualize os pacientes vinculados aos exames e laudos</p>
         </div>
         <div class="p-6">
           <div class="relative max-w-sm mb-6">
@@ -107,41 +100,6 @@
       </div>
     </div>
 
-    <!-- Modal -->
-    <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" @click.self="showModal = false">
-      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-6">
-        <h3 class="text-lg font-semibold text-slate-900 mb-1">Novo Paciente</h3>
-        <p class="text-sm text-slate-500 mb-5">Preencha os dados do paciente para cadastrá-lo no sistema</p>
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Nome Completo *</label>
-            <input v-model="form.name" placeholder="Nome completo do paciente" class="inp" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">CPF *</label>
-            <input v-model="form.cpf" placeholder="000.000.000-00" maxlength="14" class="inp" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Data de Nascimento *</label>
-            <input v-model="form.birthDate" type="date" class="inp" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">E-mail</label>
-            <input v-model="form.email" type="email" placeholder="email@exemplo.com" class="inp" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Telefone</label>
-            <input v-model="form.phone" placeholder="(11) 98765-4321" class="inp" />
-          </div>
-        </div>
-        <div class="flex gap-3 mt-6">
-          <button @click="showModal = false"
-            class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:bg-slate-50 transition">Cancelar</button>
-          <button @click="add"
-            class="flex-1 py-2 rounded-lg bg-[#24b6a1] text-white text-sm font-medium hover:bg-[#1fa090] transition">Cadastrar</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -150,9 +108,7 @@ import { ref, computed } from 'vue'
 import AppHeader from '../components/AppHeader.vue'
 
 const search = ref('')
-const showModal = ref(false)
 const openMenu = ref(null)
-const form = ref({ name: '', cpf: '', birthDate: '', email: '', phone: '' })
 
 const patients = ref([
   { id: '1', name: 'Maria Silva Santos',    cpf: '123.456.789-00', birthDate: '1985-03-15', email: 'maria.silva@email.com',  phone: '(11) 98765-1234', examsCount: 8,  lastExam: '2024-01-10' },
@@ -182,16 +138,9 @@ function age(d) {
   return a
 }
 function fmtDate(d) { return new Date(d).toLocaleDateString('pt-BR') }
-function add() {
-  if (!form.value.name || !form.value.cpf || !form.value.birthDate) return
-  patients.value.unshift({ id: String(Date.now()), ...form.value, examsCount: 0, lastExam: null })
-  form.value = { name: '', cpf: '', birthDate: '', email: '', phone: '' }
-  showModal.value = false
-}
 function remove(id) { patients.value = patients.value.filter(p => p.id !== id); openMenu.value = null }
 </script>
 
 <style scoped>
 @reference "../tailwind.css";
-.inp { @apply w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none transition focus:border-[#24b6a1] focus:ring-2 focus:ring-[#24b6a1]/20; }
 </style>
