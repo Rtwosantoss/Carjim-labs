@@ -1,6 +1,24 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
+
 const showPassword = ref(false)
+const email = ref('')
+const password = ref('')
+const errorMsg = ref('')
+const router = useRouter()
+const auth = useAuthStore()
+
+function handleLogin() {
+  errorMsg.value = ''
+  const ok = auth.login(email.value, password.value)
+  if (ok) {
+    router.push('/dashboard')
+  } else {
+    errorMsg.value = 'Credenciais inválidas.'
+  }
+}
 </script>
 
 
@@ -116,12 +134,12 @@ const showPassword = ref(false)
                     <p class="mt-4 text-lg text-slate-600">Entre com suas credenciais para acessar nosso sistema</p>
                 </div>
 
-                <form class="space-y-6">
+                <form class="space-y-6" @submit.prevent="handleLogin">
                     <div>
                         <label for="email" class="block text-base font-medium text-slate-950 mb-2">
                             E-mail</label>
 
-                        <input id="email" type="email" placeholder="seu@email.com"
+                        <input id="email" type="email" placeholder="seu@email.com" v-model="email"
                             class="w-full rounded-xl border border-slate-300 px-4 py-4 text-base text-slate-900 outline-none transition focus:border-[#24b6a1] focus:ring-4 focus:ring-[#24b6a1]/20">
                     </div>
 
@@ -141,7 +159,7 @@ const showPassword = ref(false)
                         </div>
                         <!--Mostrar/Ocultar Senha-->
                         <div class="relative">
-                            <input id="password" :type="showPassword ? 'text' : 'password'" placeholder="********"
+                            <input id="password" :type="showPassword ? 'text' : 'password'" placeholder="********" v-model="password"
                                 class="w-full rounded-xl border border-slate-300 px-4 py-4 pr-12 text-base text-black outline-none transition focus:border-[#24b6a1] focus:ring-4 focus:ring-[#24b6a1]/20">
 
                             <button type="button"
@@ -166,6 +184,8 @@ const showPassword = ref(false)
                             </button>
                         </div>
                     </div>
+
+                    <p v-if="errorMsg" class="text-sm text-red-500 text-center -mb-2">{{ errorMsg }}</p>
 
                     <button type="submit"
                         class="w-full rounded-xl bg-[#24b6a1] px-4 py-4 text-lg font-bold text-white shadow-[0_4px_0_#178b7d] transition hover:bg-[#1fa491] active:translate-y-1 active:shadow-[0_2px_0_#178b7d]">
